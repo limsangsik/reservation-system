@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>제례실 예약 관리 시스템</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1>제례실 예약 관리 시스템</h1>
+			<div class="header-controls">
+				<select id="yearSelect"></select>
+				<select id="monthSelect"></select>
+				<button id="todayBtn">오늘</button>
+				<button id="newReservationBtn">새 예약</button>
+			</div>
+		</header>
+
+		<div class="dashboard">
+			<div class="calendar-view">
+				<div id="calendar"></div>
+			</div>
+
+			<div class="sidebar">
+				<div class="today-reservations">
+					<h3>오늘의 예약</h3>
+					<div id="todayList"></div>
+				</div>
+
+				<div class="recent-reservations">
+					<h3>최근 예약</h3>
+					<div id="recentList"></div>
+				</div>
+
+				<!-- 일별(시간대) 화면 -->
+				<div class="day-schedule">
+					<h3 id="dayScheduleTitle">선택한 날짜 일정</h3>
+					<div id="dayScheduleList"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 예약 등록/수정 모달 -->
+	<div id="reservationModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h2 id="modalTitle">새 예약 등록</h2>
+			<form id="reservationForm">
+				<input type="hidden" id="reservationId">
+
+				<label for="contractorName">계약자명 *</label>
+				<input type="text" id="contractorName" required>
+
+				<label for="deceasedName">고인명 *</label>
+				<input type="text" id="deceasedName" required>
+
+				<label for="reservationDate">예약 날짜 *</label>
+				<input type="date" id="reservationDate" required>
+
+				<label for="reservationTime">예약 시간 *</label>
+				<select id="reservationTime" required>
+					<option value="">시간 선택</option>
+					<!-- DAY_SLOTS와 동일하게 유지 -->
+					<option value="10:00">10:00 - 11:00</option>
+					<option value="11:00">11:00 - 12:00</option>
+					<option value="12:00">12:00 - 13:00</option>
+					<option value="13:00">13:00 - 14:00</option>
+					<option value="14:00">14:00 - 15:00</option>
+					<option value="15:00">15:00 - 16:00</option>
+					<option value="16:00">16:00 - 17:00</option>
+				</select>
+
+				<label for="staffName">담당 직원명 *</label>
+				<input type="text" id="staffName" required>
+
+				<div class="modal-buttons">
+					<button type="submit" class="btn-primary">저장</button>
+					<button type="button" id="deleteBtn" class="btn-danger">삭제</button>
+					<button type="button" class="btn-secondary" onclick="closeModal()">취소</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- 예약 상세 보기 모달 -->
+	<div id="detailModal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeDetailModal()">&times;</span>
+			<h2>예약 상세 정보</h2>
+			<div id="reservationDetails"></div>
+			<div class="modal-buttons">
+				<button class="btn-primary" onclick="editReservation()">수정</button>
+				<button class="btn-secondary" onclick="closeDetailModal()">닫기</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="script.js"></script>
+	<!-- 1) Supabase JS SDK 로드 -->
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+<!-- 2) 프로젝트 URL과 anon key로 클라이언트 생성 -->
+<script>
+  window.SUPABASE_URL = "https://wbhgijjmztapbvoyxqyf.supabase.co";
+  window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiaGdpamptenRhcGJ2b3l4cXlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEwMTgyOTksImV4cCI6MjA3NjU5NDI5OX0.TxE6WxmvrRKg4JNoda8fHu0MJBdJpxWTBAcn4N7X66I";
+  window.supabase = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+</script>
+
+<!-- 3) 여러분의 앱 로직 -->
+<script src="script.js"></script>
+</body>
+</html>
+</body>
+</html>

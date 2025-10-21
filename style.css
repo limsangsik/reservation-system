@@ -1,0 +1,139 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f5f5f5;
+	color: #333;
+}
+
+.container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+header {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	margin-bottom: 20px;
+}
+header h1 { font-size: 24px; margin-bottom: 15px; color: #2c3e50; }
+
+.header-controls { display: flex; gap: 10px; align-items: center; }
+select, button {
+	padding: 10px 15px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 14px;
+	cursor: pointer;
+}
+select { background-color: #fff; }
+button {
+	background-color: #3498db;
+	color: white;
+	border: none;
+	transition: background-color 0.3s;
+}
+button:hover { background-color: #2980b9; }
+#newReservationBtn { background-color: #27ae60; margin-left: auto; }
+#newReservationBtn:hover { background-color: #229954; }
+
+.dashboard {
+	display: grid;
+	grid-template-columns: 1fr 380px;
+	gap: 20px;
+}
+
+.calendar-view, .sidebar {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+.calendar-header {
+	text-align: center;
+	font-weight: bold;
+	padding: 10px;
+	background-color: #34495e;
+	color: white;
+	border-radius: 4px;
+}
+.calendar-day {
+	min-height: 120px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+.calendar-day:hover { background-color: #ecf0f1; }
+.calendar-day.other-month { background-color: #f9f9f9; color: #999; }
+.calendar-day.today { border: 2px solid #3498db; background-color: #e8f4f8; }
+.day-number { font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+
+.reservation-item {
+	background-color: #3498db; color: white;
+	padding: 4px 8px; margin: 3px 0; border-radius: 3px;
+	font-size: 12px; cursor: pointer; transition: background-color 0.2s;
+}
+.reservation-item:hover { background-color: #2980b9; }
+
+.sidebar h3 { margin-bottom: 15px; color: #2c3e50; font-size: 18px; }
+.today-reservations, .recent-reservations, .day-schedule { margin-bottom: 30px; }
+
+.reservation-card {
+	background-color: #f8f9fa; padding: 12px; margin-bottom: 10px; border-radius: 4px;
+	border-left: 4px solid #3498db; cursor: pointer; transition: transform 0.2s;
+}
+.reservation-card:hover { transform: translateX(5px); }
+.reservation-card p { margin: 5px 0; font-size: 14px; }
+.reservation-card strong { color: #2c3e50; }
+
+/* 모달 */
+.modal {
+	display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+	width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+	background-color: #fff; margin: 5% auto; padding: 30px; border-radius: 8px;
+	width: 90%; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+.close:hover { color: #000; }
+
+#reservationForm label {
+	display: block; margin-top: 15px; margin-bottom: 5px;
+	font-weight: bold; color: #2c3e50;
+}
+#reservationForm input, #reservationForm select {
+	width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;
+}
+.modal-buttons { display: flex; gap: 10px; margin-top: 25px; }
+.btn-primary { background-color: #27ae60; }
+.btn-primary:hover { background-color: #229954; }
+.btn-danger { background-color: #e74c3c; display: none; }
+.btn-danger:hover { background-color: #c0392b; }
+.btn-secondary { background-color: #95a5a6; }
+.btn-secondary:hover { background-color: #7f8c8d; }
+
+#reservationDetails p { margin: 10px 0; font-size: 16px; }
+#reservationDetails strong { color: #2c3e50; }
+
+/* 일별(시간대) 리스트 */
+.day-schedule h3 { margin-bottom: 15px; color: #2c3e50; font-size: 18px; }
+.slot-row {
+	display: grid; grid-template-columns: 70px 1fr; align-items: center; gap: 8px;
+	padding: 8px 10px; border: 1px solid #eee; border-radius: 4px; margin-bottom: 6px; background: #fff;
+}
+.slot-time { font-weight: bold; color: #2c3e50; }
+.slot-available {
+	color: #27ae60; background: #eaf7f0; border: 1px dashed #27ae60;
+	border-radius: 4px; padding: 4px 8px; cursor: pointer;
+}
+.slot-available:hover { background: #dff2e8; }
+.slot-booked {
+	color: #fff; background: #3498db; border-radius: 4px; padding: 4px 8px; cursor: pointer;
+}
+.slot-booked:hover { background: #2980b9; }
+
+@media (max-width: 1024px) { .dashboard { grid-template-columns: 1fr; } }
